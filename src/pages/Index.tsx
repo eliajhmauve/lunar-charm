@@ -46,8 +46,8 @@ const Index = () => {
 
   const futureBirthdays = result
     ? getFutureLunarBirthdays(
-        parseInt(result.lunarMonth) || 1,
-        parseInt(result.lunarDay) || 1,
+        result.lunarMonthNum,
+        result.lunarDayNum,
         result.isLeapMonth
       )
     : [];

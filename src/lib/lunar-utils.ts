@@ -87,6 +87,8 @@ export function gregorianToLunar(date: Date): LunarResult {
     lunarYear,
     lunarMonth,
     lunarDay,
+    lunarMonthNum: lunar.month,
+    lunarDayNum: lunar.day,
     isLeapMonth: lunar.isLeapMonth,
     zodiacAnimal,
     zodiacSign,
