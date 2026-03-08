@@ -75,11 +75,16 @@ export function gregorianToLunar(date: Date): LunarResult {
     // ignore
   }
 
+  // Use format on the lunisolar instance, not on lunar
+  const lunarYear = d.format('lY');
+  const lunarMonth = d.format('lM');
+  const lunarDay = d.format('lD');
+
   return {
     gregorianDate: date,
-    lunarYear: lunar.format('lY'),
-    lunarMonth: lunar.format('lM'),
-    lunarDay: lunar.format('lD'),
+    lunarYear,
+    lunarMonth,
+    lunarDay,
     isLeapMonth: lunar.isLeapMonth,
     zodiacAnimal,
     zodiacSign,
