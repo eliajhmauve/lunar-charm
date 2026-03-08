@@ -48,6 +48,8 @@ export interface LunarResult {
   lunarYear: string;
   lunarMonth: string;
   lunarDay: string;
+  lunarMonthNum: number;
+  lunarDayNum: number;
   isLeapMonth: boolean;
   zodiacAnimal: { name: string; emoji: string };
   zodiacSign: { name: string; symbol: string };
