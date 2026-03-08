@@ -83,11 +83,6 @@ const Index = () => {
     ? getFutureLunarBirthdays(result.lunarMonthNum, result.lunarDayNum, result.isLeapMonth)
     : [];
 
-  // Generate year options
-  const yearOptions = [];
-  for (let y = 2100; y >= 1900; y--) {
-    yearOptions.push(y);
-  }
 
   return (
     <div className="min-h-screen relative overflow-hidden">
