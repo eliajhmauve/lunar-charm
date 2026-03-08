@@ -24,6 +24,7 @@ const LUNAR_DAYS = [
 ];
 
 const Index = () => {
+  const [gregorianDate, setGregorianDate] = useState<Date | undefined>();
   const [gregorianInput, setGregorianInput] = useState('');
   const [lunarYear, setLunarYear] = useState('');
   const [lunarMonth, setLunarMonth] = useState('');
