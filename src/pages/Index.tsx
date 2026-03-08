@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { zhTW } from 'date-fns/locale';
-import { ArrowRightLeft, Share2 } from 'lucide-react';
+import { ArrowRightLeft, Share2, CalendarIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
 import { gregorianToLunar, lunarToGregorian, getFutureLunarBirthdays, type LunarResult } from '@/lib/lunar-utils';
 import ResultCard from '@/components/ResultCard';
 import FutureBirthdaysTable from '@/components/FutureBirthdaysTable';
@@ -21,6 +24,7 @@ const LUNAR_DAYS = [
 ];
 
 const Index = () => {
+  const [gregorianDate, setGregorianDate] = useState<Date | undefined>();
   const [gregorianInput, setGregorianInput] = useState('');
   const [lunarYear, setLunarYear] = useState('');
   const [lunarMonth, setLunarMonth] = useState('');
@@ -35,17 +39,15 @@ const Index = () => {
     setError('');
     setResult(null);
     try {
-      const parts = gregorianInput.split('-');
-      const date = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-      if (isNaN(date.getTime())) {
-        setError('請輸入有效的日期格式');
+      if (!gregorianDate) {
+        setError('請選擇一個日期');
         return;
       }
-      if (date.getFullYear() < 1900 || date.getFullYear() > 2100) {
+      if (gregorianDate.getFullYear() < 1900 || gregorianDate.getFullYear() > 2100) {
         setError('僅支援 1900-2100 年的日期');
         return;
       }
-      setResult(gregorianToLunar(date));
+      setResult(gregorianToLunar(gregorianDate));
     } catch {
       setError('轉換失敗，請確認日期格式正確');
     }
@@ -118,17 +120,35 @@ const Index = () => {
             <TabsContent value="gregorian">
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-muted-foreground mb-2">輸入國曆日期</label>
+                  <label className="block text-sm font-medium text-muted-foreground mb-2">選擇國曆日期</label>
                   <div className="flex gap-3">
-                    <Input
-                      type="date"
-                      value={gregorianInput}
-                      onChange={(e) => setGregorianInput(e.target.value)}
-                      onKeyDown={handleKeyDown}
-                      className="flex-1 text-lg h-12 border-gold bg-background"
-                      min="1900-01-01"
-                      max="2100-12-31"
-                    />
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            "flex-1 h-12 justify-start text-left font-normal text-base border-gold bg-background",
+                            !gregorianDate && "text-muted-foreground"
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {gregorianDate ? format(gregorianDate, 'yyyy 年 M 月 d 日', { locale: zhTW }) : '請選擇日期'}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={gregorianDate}
+                          onSelect={setGregorianDate}
+                          defaultMonth={gregorianDate || new Date(1995, 6)}
+                          fromYear={1900}
+                          toYear={2100}
+                          captionLayout="dropdown-buttons"
+                          initialFocus
+                          className={cn("p-3 pointer-events-auto")}
+                        />
+                      </PopoverContent>
+                    </Popover>
                     <Button onClick={handleGregorianConvert} className="h-12 px-6 bg-gradient-red text-primary-foreground hover:opacity-90 font-serif-tc text-base">
                       <ArrowRightLeft className="w-4 h-4 mr-2" />
                       轉換
