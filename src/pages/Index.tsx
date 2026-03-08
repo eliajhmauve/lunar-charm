@@ -120,17 +120,35 @@ const Index = () => {
             <TabsContent value="gregorian">
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-muted-foreground mb-2">輸入國曆日期</label>
+                  <label className="block text-sm font-medium text-muted-foreground mb-2">選擇國曆日期</label>
                   <div className="flex gap-3">
-                    <Input
-                      type="date"
-                      value={gregorianInput}
-                      onChange={(e) => setGregorianInput(e.target.value)}
-                      onKeyDown={handleKeyDown}
-                      className="flex-1 text-lg h-12 border-gold bg-background"
-                      min="1900-01-01"
-                      max="2100-12-31"
-                    />
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            "flex-1 h-12 justify-start text-left font-normal text-base border-gold bg-background",
+                            !gregorianDate && "text-muted-foreground"
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {gregorianDate ? format(gregorianDate, 'yyyy 年 M 月 d 日', { locale: zhTW }) : '請選擇日期'}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={gregorianDate}
+                          onSelect={setGregorianDate}
+                          defaultMonth={gregorianDate || new Date(1995, 6)}
+                          fromYear={1900}
+                          toYear={2100}
+                          captionLayout="dropdown-buttons"
+                          initialFocus
+                          className={cn("p-3 pointer-events-auto")}
+                        />
+                      </PopoverContent>
+                    </Popover>
                     <Button onClick={handleGregorianConvert} className="h-12 px-6 bg-gradient-red text-primary-foreground hover:opacity-90 font-serif-tc text-base">
                       <ArrowRightLeft className="w-4 h-4 mr-2" />
                       轉換
