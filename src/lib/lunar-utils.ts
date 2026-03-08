@@ -120,6 +120,13 @@ export function gregorianToLunar(date: Date): LunarResult {
   };
 }
 
+// 農曆轉國曆
+export function lunarToGregorian(year: number, month: number, day: number, isLeapMonth: boolean = false): LunarResult {
+  const d = lunisolar.fromLunar({ year, month, day, isLeapMonth });
+  const date = d.toDate();
+  return gregorianToLunar(date);
+}
+
 // 計算未來N年的農曆生日對應國曆日期
 export function getFutureLunarBirthdays(
   lunarMonth: number,
