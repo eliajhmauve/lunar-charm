@@ -60,6 +60,8 @@ export interface LunarResult {
   heavenlyStemBranch: string;
   weekday: string;
   solarTerm: string | null;
+  goodActs: string[];
+  badActs: string[];
 }
 
 export function gregorianToLunar(date: Date): LunarResult {
