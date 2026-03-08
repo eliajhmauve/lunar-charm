@@ -39,17 +39,15 @@ const Index = () => {
     setError('');
     setResult(null);
     try {
-      const parts = gregorianInput.split('-');
-      const date = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-      if (isNaN(date.getTime())) {
-        setError('請輸入有效的日期格式');
+      if (!gregorianDate) {
+        setError('請選擇一個日期');
         return;
       }
-      if (date.getFullYear() < 1900 || date.getFullYear() > 2100) {
+      if (gregorianDate.getFullYear() < 1900 || gregorianDate.getFullYear() > 2100) {
         setError('僅支援 1900-2100 年的日期');
         return;
       }
-      setResult(gregorianToLunar(date));
+      setResult(gregorianToLunar(gregorianDate));
     } catch {
       setError('轉換失敗，請確認日期格式正確');
     }
