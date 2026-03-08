@@ -88,6 +88,20 @@ export function gregorianToLunar(date: Date): LunarResult {
   const lunarMonth = d.format('lM');
   const lunarDay = d.format('lD');
 
+  // 宜忌
+  let goodActs: string[] = [];
+  let badActs: string[] = [];
+  try {
+    const theGodsData = (d as any).theGods;
+    if (theGodsData) {
+      const acts = theGodsData.getActs(0);
+      goodActs = acts?.good || [];
+      badActs = acts?.bad || [];
+    }
+  } catch {
+    // fallback if plugin not working
+  }
+
   return {
     gregorianDate: date,
     lunarYear,
@@ -101,6 +115,8 @@ export function gregorianToLunar(date: Date): LunarResult {
     heavenlyStemBranch: `${char8.year} ${char8.month} ${char8.day}`,
     weekday: getWeekday(date),
     solarTerm,
+    goodActs,
+    badActs,
   };
 }
 
