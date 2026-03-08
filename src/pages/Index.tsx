@@ -9,7 +9,7 @@ import { gregorianToLunar, getFutureLunarBirthdays, type LunarResult } from '@/l
 import ResultCard from '@/components/ResultCard';
 import FutureBirthdaysTable from '@/components/FutureBirthdaysTable';
 import ShareCard from '@/components/ShareCard';
-import LanternDecoration from '@/components/LanternDecoration';
+import heroBg from '@/assets/hero-bg.jpg';
 
 const Index = () => {
   const [gregorianInput, setGregorianInput] = useState('');
