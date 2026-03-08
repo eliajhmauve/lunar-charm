@@ -60,6 +60,49 @@ const ResultCard = ({ result }: ResultCardProps) => {
             />
           )}
         </div>
+
+        {/* 宜忌 */}
+        {(result.goodActs.length > 0 || result.badActs.length > 0) && (
+          <>
+            <div className="border-t border-gold my-2" />
+            <div className="space-y-3">
+              {result.goodActs.length > 0 && (
+                <div className="bg-gradient-gold rounded-xl px-4 py-3">
+                  <div className="flex items-start gap-3">
+                    <span className="text-xl flex-shrink-0">✅</span>
+                    <div>
+                      <span className="text-xs font-medium text-muted-foreground block">宜</span>
+                      <div className="flex flex-wrap gap-2 mt-1">
+                        {result.goodActs.map((act, i) => (
+                          <span key={i} className="inline-block px-2 py-0.5 text-sm font-serif-tc rounded-md bg-primary/10 text-foreground">
+                            {act}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {result.badActs.length > 0 && (
+                <div className="bg-gradient-gold rounded-xl px-4 py-3">
+                  <div className="flex items-start gap-3">
+                    <span className="text-xl flex-shrink-0">❌</span>
+                    <div>
+                      <span className="text-xs font-medium text-muted-foreground block">忌</span>
+                      <div className="flex flex-wrap gap-2 mt-1">
+                        {result.badActs.map((act, i) => (
+                          <span key={i} className="inline-block px-2 py-0.5 text-sm font-serif-tc rounded-md bg-destructive/10 text-foreground">
+                            {act}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
