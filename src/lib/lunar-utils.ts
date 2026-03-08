@@ -1,4 +1,8 @@
 import lunisolar from 'lunisolar';
+import { theGods } from '@lunisolar/plugin-thegods';
+
+// 載入神煞宜忌插件
+lunisolar.extend(theGods);
 
 // 星座計算
 const ZODIAC_SIGNS = [
