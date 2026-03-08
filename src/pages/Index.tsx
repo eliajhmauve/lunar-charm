@@ -22,7 +22,9 @@ const Index = () => {
     setResult(null);
 
     try {
-      const date = new Date(gregorianInput);
+      // Parse as local date to avoid timezone issues
+      const parts = gregorianInput.split('-');
+      const date = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
       if (isNaN(date.getTime())) {
         setError('請輸入有效的日期格式，例如：1995/07/15');
         return;
