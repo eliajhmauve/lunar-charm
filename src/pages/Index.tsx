@@ -83,11 +83,6 @@ const Index = () => {
     ? getFutureLunarBirthdays(result.lunarMonthNum, result.lunarDayNum, result.isLeapMonth)
     : [];
 
-  // Generate year options
-  const yearOptions = [];
-  for (let y = 2100; y >= 1900; y--) {
-    yearOptions.push(y);
-  }
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -148,16 +143,16 @@ const Index = () => {
               <div className="space-y-4">
                 <label className="block text-sm font-medium text-muted-foreground mb-2">輸入農曆日期</label>
                 <div className="grid grid-cols-3 gap-3">
-                  <Select value={lunarYear} onValueChange={setLunarYear}>
-                    <SelectTrigger className="h-12 border-gold bg-background font-serif-tc">
-                      <SelectValue placeholder="年" />
-                    </SelectTrigger>
-                    <SelectContent className="max-h-60">
-                      {yearOptions.map((y) => (
-                        <SelectItem key={y} value={String(y)}>{y} 年</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <Input
+                    type="number"
+                    value={lunarYear}
+                    onChange={(e) => setLunarYear(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="年（如 1995）"
+                    className="h-12 border-gold bg-background font-serif-tc"
+                    min={1900}
+                    max={2100}
+                  />
 
                   <Select value={lunarMonth} onValueChange={setLunarMonth}>
                     <SelectTrigger className="h-12 border-gold bg-background font-serif-tc">
