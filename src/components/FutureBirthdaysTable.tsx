@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { zhTW } from 'date-fns/locale';
 
 interface FutureBirthdaysTableProps {
   birthdays: Array<{ year: number; gregorianDate: Date | null; isLeapMonth: boolean }>;
