@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { zhTW } from 'date-fns/locale';
 
 interface FutureBirthdaysTableProps {
   birthdays: Array<{ year: number; gregorianDate: Date | null; isLeapMonth: boolean }>;
@@ -25,7 +26,7 @@ const FutureBirthdaysTable = ({ birthdays, lunarMonth, lunarDay }: FutureBirthda
               <span className="font-serif-tc font-semibold text-foreground">{b.year} 年</span>
               <span className="text-muted-foreground">
                 {b.gregorianDate
-                  ? format(b.gregorianDate, 'M 月 d 日（EEEE）', {})
+                  ? format(b.gregorianDate, 'M 月 d 日（EEEE）', { locale: zhTW })
                   : '無此日期'}
               </span>
             </div>

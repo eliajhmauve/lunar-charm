@@ -48,6 +48,8 @@ export interface LunarResult {
   lunarYear: string;
   lunarMonth: string;
   lunarDay: string;
+  lunarMonthNum: number;
+  lunarDayNum: number;
   isLeapMonth: boolean;
   zodiacAnimal: { name: string; emoji: string };
   zodiacSign: { name: string; symbol: string };
@@ -85,6 +87,8 @@ export function gregorianToLunar(date: Date): LunarResult {
     lunarYear,
     lunarMonth,
     lunarDay,
+    lunarMonthNum: lunar.month,
+    lunarDayNum: lunar.day,
     isLeapMonth: lunar.isLeapMonth,
     zodiacAnimal,
     zodiacSign,
