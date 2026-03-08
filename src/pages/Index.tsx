@@ -53,18 +53,23 @@ const Index = () => {
     : [];
 
   return (
-    <div className="min-h-screen pattern-chinese relative overflow-hidden">
-      <LanternDecoration />
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Hero background */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={heroBg}
+          alt="中國風背景"
+          className="w-full h-[420px] object-cover object-top"
+        />
+        <div className="absolute inset-0 h-[420px] bg-gradient-to-b from-transparent via-transparent to-background" />
+      </div>
 
       {/* Hero */}
-      <header className="relative z-10 pt-16 pb-10 text-center px-4">
-        <div className="inline-block mb-4">
-          <span className="text-6xl">🏮</span>
-        </div>
-        <h1 className="text-4xl md:text-5xl font-bold font-serif-tc text-foreground mb-3">
+      <header className="relative z-10 pt-20 pb-12 text-center px-4">
+        <h1 className="text-4xl md:text-5xl font-bold font-serif-tc text-chinese-ink mb-3 drop-shadow-sm">
           農曆生日轉換器
         </h1>
-        <p className="text-lg text-muted-foreground max-w-md mx-auto">
+        <p className="text-lg text-chinese-ink/70 max-w-md mx-auto font-medium">
           國曆農曆雙向轉換 · 生肖星座 · 天干地支
         </p>
       </header>
