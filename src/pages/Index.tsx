@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { zhTW } from 'date-fns/locale';
-import { ArrowRightLeft, Share2 } from 'lucide-react';
+import { ArrowRightLeft, Share2, CalendarIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
 import { gregorianToLunar, lunarToGregorian, getFutureLunarBirthdays, type LunarResult } from '@/lib/lunar-utils';
 import ResultCard from '@/components/ResultCard';
 import FutureBirthdaysTable from '@/components/FutureBirthdaysTable';
